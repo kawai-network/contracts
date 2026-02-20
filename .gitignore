@@ -23,6 +23,5 @@ coverage.json
 .docusaurus/
 github.com/
 
-# Note: 'lib' is NOT ignored by default in Foundry if not using submodules. 
-# Since we used --no-git, tracking 'lib' ensures dependencies are available on clone.
-# If you prefer to download them every time, keep lib/ in gitignore.
+# Dependencies under lib/ are tracked as git submodules.
+Makefile
