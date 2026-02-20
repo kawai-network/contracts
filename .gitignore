@@ -24,4 +24,3 @@ coverage.json
 github.com/
 
 # Dependencies under lib/ are tracked as git submodules.
-Makefile

@@ -28,7 +28,7 @@ Official smart contracts for the Kawai AI platform on Monad blockchain.
 | Contract | Address | Description |
 |----------|---------|-------------|
 | KAWAI Token | TBD | ERC20 token (testnet) |
-| MockUSDT | `0x3AE05118C5B75b1B0b860ec4b7Ec5095188D1CCc` | Test stablecoin |
+| MockStablecoin (MockUSDT) | `0x3AE05118C5B75b1B0b860ec4b7Ec5095188D1CCc` | Test stablecoin |
 | Payment Vault | TBD | MockUSDT deposit vault |
 | Mining Distributor | TBD | Mining rewards (testnet) |
 | Cashback Distributor | TBD | Cashback rewards (testnet) |
@@ -71,8 +71,8 @@ Official smart contracts for the Kawai AI platform on Monad blockchain.
 curl -L https://foundry.paradigm.xyz | bash
 foundryup
 
-# Install dependencies
-forge install
+# Initialize git submodules (forge-std, openzeppelin-contracts)
+git submodule update --init --recursive
 ```
 
 ### Compile Contracts
@@ -85,21 +85,21 @@ forge build
 forge test -vvv
 ```
 
-### Deploy to Mainnet
+### Deploy Contracts
 ```bash
 # Option A: Full suite deployment
-cd contracts
 forge script script/DeployKawai.s.sol:DeployKawai \
   --rpc-url $MONAD_MAINNET_RPC \
-  --private-key $DEPLOYER_PRIVATE_KEY \
+  --private-key $PRIVATE_KEY \
   --broadcast \
   --verify
 
 # Option B: Modular deployment
-make contracts-deploy-vault
-make contracts-deploy-mining-mainnet
-make contracts-deploy-cashback-mainnet
-make contracts-deploy-referral-mainnet
+make deploy-vault
+make deploy-testnet
+make deploy-referral-testnet
+make deploy-cashback-testnet
+make deploy-mining-testnet
 ```
 
 ## 🔒 Security
@@ -115,7 +115,7 @@ All contracts use OpenZeppelin libraries for battle-tested implementations.
 | MiningRewardDistributor | ✅ | ✅ Ownable | ✅ | ✅ |
 | DepositCashbackDistributor | ✅ | ✅ Ownable | ✅ | ✅ |
 | ReferralRewardDistributor | ✅ | ✅ Ownable | ✅ | ✅ |
-| OTCMarket (Escrow) | ✅ | ❌ | ❌ | ❌ |
+| OTCMarket | ✅ | ❌ | ❌ | ❌ |
 
 **Key Security Measures:**
 - ReentrancyGuard on all state-changing functions (where applicable)
@@ -127,11 +127,11 @@ All contracts use OpenZeppelin libraries for battle-tested implementations.
 
 ## 📄 License
 
-MIT License - see [LICENSE](../LICENSE) for details
+PolyForm Noncommercial License 1.0.0.
 
 ## 🤝 Contributing
 
-See main repository [README](../README.md) for contribution guidelines.
+Please open an issue or pull request for contributions.
 
 ## 📞 Support
 
